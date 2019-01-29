@@ -32,8 +32,10 @@ class BarcodeListFragment : FragmentView(R.layout.fragment_barcode_list) {
             }
         }
 
-        launch {
-            viewModel.loadBarcodes()
+        if (savedInstanceState == null) {
+            launch {
+                viewModel.loadBarcodes()
+            }
         }
     }
 

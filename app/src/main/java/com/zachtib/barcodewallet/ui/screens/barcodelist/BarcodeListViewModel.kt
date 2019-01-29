@@ -8,7 +8,7 @@ import com.zachtib.barcodewallet.ui.model.Resource
 import kotlinx.coroutines.delay
 
 class BarcodeListViewModel : ViewModel() {
-    private val _barcodes = MutableLiveData<Resource<List<Barcode>>>()
+    private val _barcodes = MutableLiveData<Resource<List<Barcode>>>().apply { value = Resource.Loading }
 
     val barcodes: LiveData<Resource<List<Barcode>>>
         get() = _barcodes
