@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.zachtib.barcodewallet.R
 import com.zachtib.barcodewallet.models.Barcode
 import com.zachtib.barcodewallet.ui.ktx.inflate
+import kotlinx.android.synthetic.main.item_barcode.view.*
 
 class BarcodeListAdapter(private val clickListener: (Barcode) -> Unit) :
     ListAdapter<Barcode, BarcodeListAdapter.ViewHolder>(BarcodeDiffCallback) {
@@ -22,7 +23,8 @@ class BarcodeListAdapter(private val clickListener: (Barcode) -> Unit) :
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(barcode: Barcode, clickListener: (Barcode) -> Unit) {
-            TODO()
+            itemView.nameTextView.text = barcode.name
+            itemView.setOnClickListener { clickListener(barcode) }
         }
     }
 }
