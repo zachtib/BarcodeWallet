@@ -10,11 +10,13 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import org.koin.androidx.viewmodel.ext.android.viewModelByClass
 import timber.log.Timber
 import kotlin.coroutines.CoroutineContext
+import kotlin.reflect.KClass
 
 
-abstract class FragmentView<VM : ViewModel> : Fragment(), CoroutineScope, MvvmView {
+abstract class FragmentView<out T : ViewModel>(clazz: KClass<T>) : Fragment(), CoroutineScope, MvvmView {
 
     private lateinit var job: Job
 
@@ -23,6 +25,8 @@ abstract class FragmentView<VM : ViewModel> : Fragment(), CoroutineScope, MvvmVi
 
     @get:LayoutRes
     protected abstract val layoutId: Int
+
+    protected val viewModel: T by viewModelByClass(clazz)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Timber.d("Creating ${javaClass.simpleName}")
